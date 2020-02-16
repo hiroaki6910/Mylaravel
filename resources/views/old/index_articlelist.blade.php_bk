@@ -1,0 +1,68 @@
+@extends('main')
+@section('header')
+    <nav>
+        @if(Auth::check())
+        <div class="v2" style="max-width:1250px; font-size:30px; font-family:Comic Sans MS; text-align:left; display: inline;">slackers</div>
+        @else
+        <div class="v2" style="max-width:1250px; font-size:30px; font-family:Comic Sans MS; text-align:left; display: inline; margin-right:990px;">slackers</div
+        @endif
+        @if(Auth::check())
+        @csrf
+        <div class="v2" style="margin-left:770px;"><a href="">メッセージ</a></div>
+        <div class="v2"><a href=>訪問者</a></div>
+        <div class="v2">{{ Auth::user()->name }}</div>
+        <div class="v2"><a href="{{ url('mypage') }}">マイページ</a></div>
+        <div class="v2">
+            <a href="{{ route('logout') }}">ログアウト</a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+        </div>
+            @else
+            <span class="v2" style="margin-left:">
+                <a href="{{ route('login') }}">ログイン</a>
+            </span>
+            <div class="v2">
+                <a href="{{ route('register') }}">会員登録</a>
+            </div>
+            @endif
+        <div style="width:1250px; height:200px; margin-left:auto; margin-right:auto; padding-left:0px; text-align:left; display:flex;justify-content:center; align-items:center; border-style:groove;">
+            <form action="" method="post" style="">
+                <p>募集記事・メンバーをさがす</p>
+                <input type="search" name="search" placeholder="キーワードを入力">
+                <input type="submit" name="submit" value="検索">
+            </form>
+        </div>
+    </nav>
+@endsection
+
+@section('content')
+        <div style="width:1250px; height:1000px; margin-left:auto; margin-right:auto; padding-left:0px; border-style:groove;">
+            <div>
+               <span><a href="{{url('main')}}">メンバー一覧へ</a></span>
+            </div>
+            <div style="width:900px; display:inline-block; border-style:groove; margin-left:auto; margin-right:auto;">
+                @foreach ($show as $show)
+                <div style="display:flex; flex-direction:column-reverse;">
+                    <div>
+                        <div>{{$show->name}}</div>
+                        <span>{{$show->user_detail->age}}歳</span>
+                        <span>{{$show->user_detail->gender}}</span>
+                    </div>
+                @foreach ($show->article as $value)
+                    <div>
+                        <div>{{$value->title}}</div>
+                        <div>{{$value->content}}</div>
+                    </div>
+                </div>
+                @endforeach
+                @endforeach
+            </div>
+        </div>
+@endsection
+
+@section('footer')
+        <div style="width:1250px; height:px; margin-left:auto; margin-right:auto; padding-left:0px; text-align:left; display:flex;justify-content:center; align-items:center; border-style:groove;">
+        copyright 2019 BM search.
+        </<div>
+@endsection

@@ -1,0 +1,27 @@
+@extends('main')
+
+@section('content')
+        <div id="" style="height:1000px;padding-left:0px; text-align:left; border-style:groove; ">
+                <div style="width:350px; display:inline-block; border-style:groove;">
+                メッセージ履歴       
+                </div>
+                <div style="display:inline-block;">
+                        <div style="height:400px; border-style:groove;">
+                        {{$destination->name}}      
+                        </div>
+                        <div>
+                        　
+                        </div>
+                        <div style="border-style:groove;">
+                        <form action="" method="post">
+                        @csrf
+                        <textarea name="content" rows="5" cols="50">メッセージ入力</textarea>
+                        <input type="submit" value="登録">
+                        <input type="hidden" name="id" value="{{ Auth::user()->id }}">
+                        <input type="hidden" name="recipient_id" value="$destination->id">
+                        </form>
+                        </div>
+                </div>
+        </div>
+        <script src="{{asset('js/app.js')}}" ></script>
+@endsection

@@ -1,0 +1,48 @@
+<?php
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateArticlesTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('articles', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('user_id'); //外部キーを参照する
+            $table->text('title');
+            $table->string('area');
+            $table->string('day');
+            $table->string('direction');
+            $table->string('articleage');
+            $table->string('part');
+            $table->string('genre');
+            $table->string('song');
+            $table->string('demo');
+            $table->text('content');
+            $table->timestamps();
+            
+            //外部キーを参照（usersテーブルのidカラムを参照）
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('articles');
+    }
+}

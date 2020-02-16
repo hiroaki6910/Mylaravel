@@ -1,0 +1,51 @@
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+import axios from 'axios';
+
+export class Message extends Component {
+    
+    constructor() {
+    super();
+
+    this.state = {
+        user: []
+        };
+
+    }
+    
+    componentDidMount() {
+        axios
+        .get('api/message_react')
+        .then(response => {
+            this.setState({
+                user: response.data
+            });
+        })
+        .catch(error => {
+                console.log(error);
+            });
+    }
+        
+    renderPitchers(){
+        return this.state.user.map(user=>{
+        return (
+            <div key={user.key}>
+                名前 : {user.name}<br/>
+                アドレス : {user.email}<br/>
+            </div>      
+        );
+        });
+    }
+    
+    render() {
+        return (
+                <div>
+                {this.renderPitchers()}
+                </div>
+        );
+    }
+}
+
+if (document.getElementById('message')) {
+    ReactDOM.render(<Message />, document.getElementById('message'));
+}

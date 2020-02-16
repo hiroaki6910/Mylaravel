@@ -1,0 +1,106 @@
+<?php
+namespace App\Http\Controllers;
+
+use Illuminate\Support\Facades\Auth;
+
+use Illuminate\Http\Request;
+ 
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
+use App\User;
+use App\User_detail;
+use App\Article;
+ 
+class MainController extends Controller
+{
+    //メンバー一覧ページ表示
+    public function getIndex()
+    {
+        return view('index');
+    }
+    
+    //メンバー一覧の取得
+    public function showmember(Request $request)
+    {
+        //実装中↓
+        //$show = User::nameEqual($request->name);
+
+        //$show_m = User_detail::addEqual($request->add)
+        //->partEqual($request->part)
+        //->genreEqual($request->genre)
+        //->genderEqual($request->gender)
+        //->ageGreater($request->agemax)
+        //->ageLessthan($request->agemin)
+        //->artistEqual($request->artist)
+        //->get();
+        //dd($show_m->ToArray());
+        
+        //実装中↑
+        
+        //$show = User::with(['user_detail', 'article'])->get();
+        //dd($show->ToArray());
+        
+        //$show = User::searchmember();
+        //dd($show->ToArray());
+        
+        $name = $request->name;
+        $add =  $request->add;
+        $part = $request->part;
+        $genre = $request->genre;
+        $gender = $request->gender;
+        $agemax = $request->agemax;
+        $agemin = $request->agemin;
+        $artist = $request->artist;
+        
+        $show = User::with(['user_detail'])
+        ->when($name, function ($query,$name){
+        return $query->where('name','LIKE', '%'.$name.'%');
+        })
+        ->when($add, function ($query, $add){
+        return $query->where('address', '=', '%'.$add.'%');
+        })
+        ->when($part, function ($query, $part){
+        return $query->where('part', '=', '%'.$part.'%');
+        })
+        ->when($genre, function ($query, $genre){
+        return $query->where('genre', '=', '%'.$genre.'%');
+        })
+        ->when($gender, function ($query, $gender){
+        return $query->where('gender', '=', '%'.$gender.'%');
+        })
+        ->when($agemax, function ($query, $agemax){
+        return $query->where('age', '>=' , $agemax);
+        })
+        ->when($agemin, function ($query, $agemin){
+        return $query->where('age', '<=' , $agemin);
+        })
+        ->when($artist, function ($query ,$artist){
+        return $query=User::whereHas('user_detail', function($query1){
+        $query1->where('artist', 'like' , '%'.$artist.'%');
+        });
+        })
+        ->get();
+        
+        return view('index', compact('show'));
+    }
+    
+    //メンバー一覧の検索ページ
+    public function show_search_m()
+    {
+        return view('search_member');
+    }
+    
+    //記事一覧ページ表示
+    public function articlelist()
+    {
+        return view('index_articlelist');
+    }
+    
+    //記事一覧の取得
+    public function showarticle()
+    {
+        $show_article = Article::with(['user', 'user_detail'])->get();
+        //dd($show_article->ToArray());
+        return view('index_articlelist', compact('show_article'));
+    }
+}

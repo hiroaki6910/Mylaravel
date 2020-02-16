@@ -1,0 +1,23 @@
+@charset "utf-8";
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 3;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5);
+   
+}
+
+.modal-content{
+    
+    background-color: white;
+    width: 700px;
+    height: 600px;
+    margin: 5% auto;
+    bottom: 0;
+}

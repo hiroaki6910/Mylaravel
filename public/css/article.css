@@ -1,0 +1,16 @@
+@charset "utf-8";
+
+.pulldown-body {
+    display: none;
+    background-color: rgba(0, 0, 0, 0.03);
+    height: 400px;
+}
+.title_article{
+    margin-left: 3px;
+    color: #426e92;
+}
+.title_article_content{
+    margin-left: 3px;
+}
+
+

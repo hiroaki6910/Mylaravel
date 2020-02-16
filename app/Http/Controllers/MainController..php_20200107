@@ -1,0 +1,70 @@
+<?php
+namespace App\Http\Controllers;
+
+use Illuminate\Support\Facades\Auth;
+
+use Illuminate\Http\Request;
+ 
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
+use App\User;
+use App\User_detail;
+use App\Article;
+ 
+class MainController extends Controller
+{
+    //メンバー一覧ページ表示
+    public function getIndex()
+    {
+        return view('index');
+    }
+    
+    //メンバー一覧の取得
+    public function showmember(Request $request)
+    {
+        //実装中↓
+        //$name = $request->name;
+        //$add = implode(",", $request->add);
+        //$part = implode(",", $request->part);
+        //$genre = implode(",", $request->genre);
+        //$sex = $request->sex;
+        //$agemin = $request->agemin;
+        //$agemax = $request->agemax;
+        //$artist = $request->artist;
+        
+        //$query = User::with(['user_detail'])->query();
+        
+        //foreach ($request->only(['name', 'add','part','genre','sex','agemin','agemax','artist']) as $key => $value) {
+           //$query->where($key, 'like', '%'.$value.'%');
+        //}
+
+        //最後にget(
+        //$show = $query->get();
+        
+        //実装中↑
+        
+        $show = User::with(['user_detail', 'article'])->get();
+        //dd($show->ToArray());
+        return view('index', compact('show'));
+    }
+    
+    //メンバー一覧の検索ページ
+    public function show_search_m()
+    {
+        return view('search_member');
+    }
+    
+    //記事一覧ページ表示
+    public function articlelist()
+    {
+        return view('index_articlelist');
+    }
+    
+    //記事一覧の取得
+    public function showarticle()
+    {
+        $show_article = Article::with(['user', 'user_detail'])->get();
+        //dd($show_article->ToArray());
+        return view('index_articlelist', compact('show_article'));
+    }
+}

@@ -1,0 +1,47 @@
+<?php
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateUserDetailsTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('user_details', function (Blueprint $table) {
+            $table->bigIncrements('id')->primary();
+            $table->integer('member_id'); //外部キーを参照する
+            $table->integer('gender');
+            $table->integer('age');
+            $table->integer('address');
+            $table->string('part');
+            $table->string('genre');
+            $table->string('artist');
+            $table->integer('community');
+            $table->string('url');
+            $table->text('introduction');
+            $table->timestamps();
+            
+            //外部キーを参照（usersテーブルのidカラムを参照）
+            $table->foreign('member_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('user_details');
+    }
+}
