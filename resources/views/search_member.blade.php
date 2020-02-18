@@ -14,14 +14,14 @@
 <body>
     <form action="" method="post">
         @csrf
-        <div style="width:1000px; height:px; margin-left:auto; margin-right:auto; padding-left:0px; border: 1px solid #ccc;">
+        <div style="width:1000px; height:px; margin-left:auto; margin-right:auto; padding-left:0px; background-color:white; border: 1px solid #ccc;">
             <div style="border-bottom: 1px solid #ccc;">
                <span>メンバー検索フォーム</span>
             </div>
             <div class="title">
                 <div class="title1">名前</div>
                 <div class="content">
-                    <input type="text" name="name">
+                    <input type="text" name="name" >
                 </div>
             </div>
             <div class="title" style="height:100px;">
@@ -112,17 +112,17 @@
                 <div class="content">
                     <select name="gender">
                         <option value="" selected>指定なし</option>
-                        <option value="男">男</option>
-                        <option value="女">女</option>
+                        <option value="1">男</option>
+                        <option value="2">女</option>
                     </select>
                 </div>
             </div>
             <div class="title">      
                 <div class="title1">年齢</div>
                 <div class="content">
-                    <input type="number" name="agemin">
+                    <input type="number" name="agemin" value="{{ old('agemin') }}">
                     〜
-                    <input type="number" name="agemax">
+                    <input type="number" name="agemax" value="{{ old('agemax') }}">
                 </div>
             </div>
             <div class="title">      
@@ -132,8 +132,8 @@
                 </div>
             </div>
             <div style="text-align:center;">
-                <input type="reset" value="キャンセル">
-                <input type="submit" value="検索">
+                <input class="btn-search" type="reset" value="入力内容をクリア">
+                <input class="btn-search" type="submit" value="検索">
             </div>
         </div>
     </form>

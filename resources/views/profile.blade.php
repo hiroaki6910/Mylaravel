@@ -13,7 +13,7 @@
                 @if (isset($message))
                 <div class="alert">{{$message}}</div>
                 @endif
-                <form action="/profile" method="post" enctype="multipart/form-data">
+                <form action="" method="post" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     @if($profAftEdt->user_detail->file_name == null)
                         <div><img src="{{ asset('image/profile.png') }}" alt="logo"></div>
@@ -21,7 +21,7 @@
                         <div><img src="/storage/{{$profAftEdt->user_detail->file_name}}"alt="logo" style="width:100px; height:100px;"></div>
                     @endif
                         <label for="uploadimg">
-                        ファイルを選択
+                        プロフィール画像を変更する
                         <input type="file" name="image_file" id="uploadimg">
                         </label>
                         <div style=" margin-bottom:10px;">

@@ -16,4 +16,22 @@
     display:inline-block; 
 }
 
+.btn-search {
+    display: inline-block;
+    padding: 0.3em 1em;
+    margin-top: 25px;
+    margin-left: 3px;
+    margin-bottom: 25px;
+    text-decoration: none;
+    color: #77a8da;
+    border: solid 1px #77a8da;
+    border-radius: 3px;
+    transition: .4s;
+}
+
+.btn-search:hover {
+  background: #77a8da;
+  text-decoration: none;
+  color: white;
+}
 

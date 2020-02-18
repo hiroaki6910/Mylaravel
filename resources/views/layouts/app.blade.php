@@ -18,13 +18,19 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/main.css') }}" rel="stylesheet" />
 </head>
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/main') }}">
-                    <div style="font-size:40px; font-family:Comic Sans MS; text-align:center;"><span style="color:#77a8da; text-align:center;">■</span>slackers</div>
+                    <div style="font-size:40px; font-family:Comic Sans MS; text-align:center;">
+                        <span class="logo" style="top: 6px; left: 144px;">■</span>
+                        <span class="logo2" style="top: 23px; left: 160px;">■</span>
+                        <span class="maintitle" >slackers</span>
+                    </div>
+                    <div><p style="font-size:15px;">バンドメンバーが見つかるサイト</p></div>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>

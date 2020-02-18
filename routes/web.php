@@ -21,16 +21,14 @@ Route::get('/main', function () {
     return view('main');
 });
 Route::get('/main', 'MainController@getIndex');
-//Route::post('/main', 'MainController@postIndex');
 Route::get('/main', 'MainController@showmember');
 Route::post('/main', 'MainController@sendmessage');
+Route::post('/main','MessageController@ShowMessage');
+//Route::post('/main', 'MainController@postIndex');
 //Route::get('/main/{id}', 'MainController@modal');
-
 //Route::post('/main',function () {
 //    return redirect()->action('MessageController@ShowMessage');
 //}); 
-
-Route::post('/main','MessageController@ShowMessage');
 
 //検索ページの表示
 Route::get('/search_member', 'MainController@show_search_m');
@@ -64,9 +62,10 @@ Route::post('/article_edt', 'PostArticleController@ArticleRegist');
 Route::get('/message', function () {
     return view('message');
 });
-//Route::get('/message', 'MessageController@ShowMessage');
 Route::get('/message', 'MessageController@MessageHistory');
 Route::post('/message', 'MessageController@PostMessage');
+
+//Route::get('/message', 'MessageController@ShowMessage');
 
 //Route::get('/message/{id}', 'MainController@sendmessage');
 

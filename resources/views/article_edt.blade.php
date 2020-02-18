@@ -1,13 +1,13 @@
 @extends('main')
 @section('content')
     <div style="max-width:1000px; margin-left: auto; margin-right:auto;">
-        <span>マイページトップ</span>
+        <span><a class="link" href="{{ url('profile') }}">マイページトップ</a></span>
         <div style="max-width:1000px;">
             <div></div>
         </div>
     </div>
         <div style="max-width:1000px; margin-left:auto; margin-right:auto;">
-            <div style="width:788px; margin-left:3px; border-bottom:1px solid #ccc;">記事の投稿</div>
+            <div style="display:inline-block; width:788px; margin-left:3px; border-bottom:1px solid #ccc;">記事の投稿</div>
                 <form action="" method="post">
                     @csrf
                     <div class="prof">
@@ -151,16 +151,10 @@
                     <!-- ログインしているユーザーのidをhiddenで送る-->
                     <input type="hidden" name="id" value="{{$user->id}}">
                     <input type="hidden" name="detail_id" value="{{$userdetail_id['0']->id}}">
-                    <div style="text-align:center;">
-                        <input type="reset" value="キャンセル">
-                        <input type="submit" value="登録">
+                    <div style="text-align:center; margin-top:25px;">
+                        <input class="btn-flat-border" type="reset" value="入力内容をクリア">
+                        <input class="btn-flat-border" type="submit" value="登録">
                     </div>
                 </form>
         </div>
-@endsection
-
-@section('footer')
-    <div style="width:1000px; height:px; margin-left:auto; margin-right:auto; padding-left:0px; text-align:left; display:flex;justify-content:center; align-items:center; border-style:groove;">
-        copyright 2019 BM search.
-    </<div>
 @endsection

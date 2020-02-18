@@ -14,7 +14,7 @@
 <body>
     <form action="" method="post">
         @csrf
-        <div style="width:1000px; height:px; margin-left:auto; margin-right:auto; padding-left:0px; border: 1px solid #ccc;">
+        <div style="width:1000px; height:px; margin-left:auto; margin-right:auto; padding-left:0px; background-color:white; border:1px solid #ccc;">
             <div style="border-bottom: 1px solid #ccc;">
                <span>募集記事検索フォーム</span>
             </div>
@@ -123,8 +123,8 @@
                     </select>
             </div>
             <div style="text-align:center;">
-                <input type="reset" value="キャンセル">
-                <input type="submit" value="検索">
+                <input class="btn-search" type="reset" value="入力内容をクリア">
+                <input class="btn-search" type="submit" value="検索">
             </div>
         </div>
     </form>

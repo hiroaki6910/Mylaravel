@@ -7,9 +7,6 @@
         </div>
         <div>
             @if(Auth::check())
-            @if(!isset($memberlist[0]))
-            <div>メンバーが見つかりませんでした</div>
-            @endif
             @foreach ($memberlist as $memberlist)
             @if($memberlist->id !== Auth::user()->id)
             <div style="display:inline-block; width:195px; max-width:195px; height:255px; max-height:255px; margin-top:10px; text-align:center;">
@@ -19,13 +16,7 @@
                 </div>
                 <div style="text-align:center;">
                     <span style="">{{$memberlist->user_detail->age}}歳</span>
-                    <span style="">
-                        @if($memberlist->user_detail->gender == "1")
-                        男性
-                        @else
-                        女性
-                        @endif
-                    </span>
+                    <span style="">{{$memberlist->user_detail->gender}}性</span>
                     <span style="">{{$memberlist->user_detail->address}}</span>
                 </div>
                 <div class="balloon-top" style="text-align:center; margin-top:15px; margin-bottom:5px; padding:5px;">
@@ -35,16 +26,28 @@
                 </div>
                 <form action="" method="post" name="my">
                     @csrf
+                    <!--コメント
+                    <button><a class="btn" href="" data-target="">詳細</a></button>
+                    !-->
                     <input type="button" class="btn" value="詳細" style="color:#77a8da; border:solid 1px #77a8da;">
                     <input type="hidden" class="sendid" name="destination_id" data-target="" value="{{$memberlist->id}}">
                 </form>
+                <!--コメント
+                <button><a class="btn" href="{{url('message_react/',$memberlist->id)}}">メッセージを送る</a></button>
+                <button><a class="btn" href="{{url('message/',$memberlist->id)}}">aaa</a></button>
+                !-->
+                <!--コメント
+                <form action="" method="post">
+                    @csrf
+                    <input type="submit" value="メッセージを送る">
+                    <button><a class="btn" href="{{url('message_react')}}">メッセージを送る</a></button>
+                    <input type="hidden" name="destination_id" value="{{$memberlist->id}}">
+                </form>
+                    !-->
             </div>
             @endif
             @endforeach
             @else
-            @if(!isset($memberlist[0]))
-            <div>メンバーが見つかりませんでした</div>
-            @endif
             @foreach ($memberlist as $memberlist)
             <div style="display:inline-block; width:195px; max-width:195px; height:255px; height:255px; max-height:255px; margin-top:10px; text-align:center;">
                 <div style="text-align:center;"><img src="/storage/{{$memberlist->user_detail->file_name}}" alt="logo" style="width:90px; height:90px;"></div>
@@ -69,9 +72,24 @@
                 </div>
                 <form action="" method="post" name="my">
                     @csrf
+                    <!--コメント
+                    <button><a class="btn" href="" data-target="">詳細</a></button>
+                    !-->
                     <input type="button" class="btn" value="詳細" style="color: #77a8da; border: solid 1px #77a8da;">
                     <input type="hidden" class="sendid" name="destination_id" data-target="" value="{{$memberlist->id}}">
                 </form>
+                <!--コメント
+                <button><a class="btn" href="{{url('message_react/',$memberlist->id)}}">メッセージを送る</a></button>
+                <button><a class="btn" href="{{url('message/',$memberlist->id)}}">aaa</a></button>
+                !-->
+                <!--コメント
+                <form action="" method="post">
+                    @csrf
+                    <input type="submit" value="メッセージを送る">
+                    <button><a class="btn" href="{{url('message_react')}}">メッセージを送る</a></button>
+                    <input type="hidden" name="destination_id" value="{{$memberlist->id}}">
+                </form>
+                    !-->
             </div>
             @endforeach
             @endif
@@ -140,6 +158,15 @@
             $(function(){
                 var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
                 $('.btn').on('click',function(){
+                    /*　試行錯誤
+                    var form = $(this).closest('form').get(0);
+                    var elem = form.elements['sendid'].value;
+                    let form = document.forms.my;
+                    let elem = form.elements.destination_id;
+                    const send = document.my.destination_id.value;
+                    */
+                    //let send = $('input:hidden[name="destination_id"]').val();
+                    
                    //親要素の取得（親要素をまず取得しないと、foreachでループしている値を取り出せない）
                     var $_t = $( this ).parent();
                     //取得した親要素の中のsendidクラスを取得
@@ -177,7 +204,10 @@
                         $('#intro').text(results[0]["user_detail"]["introduction"]);
                         $('#mordal_user_id').val(results[0]["id"]);
                         $('#mordal_user_name').val(results[0]["name"]);
-
+                        
+                        /*　プロフィール写真のパスを置換する処理（失敗した方法）
+                        //$('#pct').append('<img src="/storage/'+results[0]["user_detail"]["file_name"]+'">');
+                        */
                         //プロフィール写真のパスを置換する処理
                         var changeL = $('#cmg').attr('src').replace('normal' , results[0]["user_detail"]["file_name"]);
 		                $('#cmg').attr('src', changeL);
@@ -199,7 +229,32 @@
                 return false;
                 });
             });
+            
+            /*
+            $(function(){    
+            $('btn').each(function(){
+                $(this).on('click',function(){
+                    var target = $(this).data('target');
+                    var modal = document.getElementById(target);
+                    //$(modal).fadeIn();
+                    //return false;
+                    modal.style.display = 'block';
+                });
+            });
+            
+            var closeBtn = document.getElementById('closeBtn');
+
+            closeBtn.addEventListener('click', function() {
+            modal.style.display = 'none';
+            })
+            });
+            
+            $(function() {
+                $('.btn').on('click', function() {
+                $('.modal, .modal-content').style.display = 'block';
+                });
+            });
+            */
             </script>
         </div>
-    </div>
 @endsection

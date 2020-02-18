@@ -70,9 +70,14 @@ class UserprofileController extends Controller
     public function profile(Request $request)
     {
         $user_id = Auth::id(); //1.ログインしているユーザーのIDを取り出す
-        $uspro = User::find($user_id); //2.取り出したログインユーザーIDを元にプロフィール情報を取得(user_detailsテーブル(プロフィール情報)とはhasOnedeでリレーションを結んでいるので、自動的に値を取得できる。)
+        $uspro = User::with(['user_detail'])->find($user_id); //2.取り出したログインユーザーIDを元にプロフィール情報を取得(user_detailsテーブル(プロフィール情報)とはhasOnedeでリレーションを結んでいるので、自動的に値を取得できる。)
+        $us_part = explode(",", $uspro->user_detail->part);
+        $us_genre = explode(",", $uspro->user_detail->genre);
+        //print_r($us_part);
+        //print_r($us_genre);
         //dd($uspro->ToArray());
-            return view('profile_edt', ['uspro' => $uspro]);
+        
+        return view('profile_edt', compact('uspro','us_part','us_genre'));
     }
     
     //アップデート処理

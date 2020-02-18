@@ -30,7 +30,9 @@ class MainController extends Controller
     //メンバー一覧の検索ページ
     public function show_search_m()
     {
-        return view('search_member');
+        $data = session()->all();
+        return $data;
+        return view('search_member' ,compact('$data'));
     }
     
     //メンバー一覧の取得
@@ -95,12 +97,12 @@ class MainController extends Controller
         }
         if(isset($agemax)&&$agemax!==NULL){
         	$show=User::whereHas('user_detail', function($query) use($agemax){
-            $query->where('age', '>=' , $agemax);
+            $query->where('age', '<=' , $agemax);
             });
         }
         if(isset($agemin)&&$agemin!==NULL){
         	$show=User::whereHas('user_detail', function($query) use($agemin){
-            $query->where('age', '<=' , $agemin);
+            $query->where('age', '>=' , $agemin);
             });
         }
         if(isset($artist)&&$artist!==NULL){
@@ -112,7 +114,7 @@ class MainController extends Controller
         $memberlist = $show->get();
         
         //dd(DB::getQueryLog());
-        //dd($show->ToArray());
+        //dd($memberlist->ToArray());
         
         return view('index', compact('memberlist'));
     }
@@ -183,7 +185,7 @@ class MainController extends Controller
         	$show_article->where('day',$day);
         }
         
-        $articlelist = $show_article->with(['user', 'user_detail'])->get();
+        $articlelist = $show_article->with(['user', 'user_detail'])->paginate(10);
         
         //dd($articlelist->ToArray());
         return view('index_articlelist', compact('articlelist'));
@@ -203,5 +205,4 @@ class MainController extends Controller
         //$tomessage = User::where('id',$request->destination_id)->get();
         //return response()->json(['tomessage'=> $tomessage]);
     }
-    
 }

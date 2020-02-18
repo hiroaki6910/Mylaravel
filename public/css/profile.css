@@ -1,23 +1,18 @@
 @charset "utf-8";
 
 label {
-    
-     
-     cursor: pointer;
-     padding: 15px 30px;
-     margin: 0 10px 0 0;
-     display: inline-block;
+    cursor: pointer;
+    padding: 15px 30px;
+    margin: 0 0 0 218px;
+    display: inline-block;
 }
 
 label input {
-     opacity: 0;
-     filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0);
-      position: absolute;
-      right: 0;
-      top: 0;
-      margin: 0;
-      font-size: 100px;
-      cursor: pointer;
+    opacity: 0;
+    filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0);
+    position: relative;
+    height: 20px;
+    cursor: pointer;
 }
 
 .btn-flat-border {

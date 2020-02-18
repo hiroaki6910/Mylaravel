@@ -3,7 +3,9 @@
 .pulldown-body {
     display: none;
     background-color: rgba(0, 0, 0, 0.03);
-    height: 400px;
+    max-height: 100%;
+    min-height: 300px;
+    margin-left: 3px;
 }
 .title_article{
     margin-left: 3px;

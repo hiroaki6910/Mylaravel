@@ -119,14 +119,15 @@
                                 cts += "<div class='bms_message_text'>"+ results[i].message.content + "</div>";
                                 cts += "</div>";
                                 cts += "</div>";
-                                cts += "<div class='date'>"+ results[i].created_at + "</div>";
+                                cts += "<div class='data'>"+ results[i].created_at + "</div>";
                                 cts += "</div>";
                         }else{
                         //相手から送られてきているメッセージ
+                            var img = results[i]["sender_user"]["user_detail"]["file_name"];
                             var cts ="";
                                 cts =  "<div class='bms_message bms_left'>";
                                 cts += "<span style='display:inline-block;'>"
-                                cts += "<img id ='cmg' src='/storage/normal' style='width:30px; height:30px;'>";
+                                cts += "<img id ='cmg' src='/storage/"+img+"' style='width:30px; height:30px;'>";
                                 cts += "</span>";
                                 cts += "  <span>"+ results[i].message.user.name + "</span>";
                                 cts += "<div class='bms_message_box'>";
@@ -134,7 +135,7 @@
                                 cts += "  <div class='bms_message_text'>"+ results[i].message.content + "</div>";
                                 cts += "</div>";
                                 cts += "</div>";
-                                cts += "  <div class='date'>"+ results[i].created_at + "</div>";
+                                cts += "<div class='data'>"+ results[i].created_at + "</div>";
                                 cts += "</div>";
                         }
                         $('#bms_messages').append(cts);
@@ -173,8 +174,8 @@
                         type:"POST",
                         url:"{{url('/api/message')}}",
                         data:{
-                            _token: CSRF_TOKEN,
-                            id  :otheruser
+                            _token : CSRF_TOKEN,
+                            id     : otheruser
                         },
                         dataType: 'json'
                         
@@ -216,41 +217,33 @@
                                 cts += "<div class='bms_message_text'>"+ results[i].message.content + "</div>";
                                 cts += "</div>";
                                 cts += "</div>";
-                                cts += "<div class='date'>"+ results[i].created_at + "</div>";
+                                cts += "<div class='data'>"+ results[i].created_at + "</div>";
                                 cts += "</div>";
                             }else{
                                 //相手から送られてきているメッセージ
-                                //var ctus ="";
-                                //ctus ="<div id='bms_chat_user_name'>";
-                                //ctus += "<span>"+results[i].sender_user.name+ "</span>";
-                                //ctus += "</div>";
-                                
+                                var img = results[i]["sender_user"]["user_detail"]["file_name"];
+                                //console.log(img);
                                 var cts ="";
                                 cts =  "<div class='bms_message bms_left'>";
                                 cts += "<span style='display:inline-block;'>"
-                                cts += "<img id ='cmg' src='/storage/normal' style='width:30px; height:30px;'>";
+                                cts += "<img id ='cmg' src='/storage/"+img+"' style='width:30px; height:30px;'>";
                                 cts += "</span>";
-                                cts += "  <span>"+ results[i].message.user.name + "</span>";
+                                cts += "<span>"+ results[i].message.user.name + "</span>";
                                 cts += "<div class='bms_message_box'>";
                                 cts += "<div class='bms_message_content'>";
-                                cts += "  <div class='bms_message_text'>"+ results[i].message.content + "</div>";
+                                cts += "<div class='bms_message_text'>"+ results[i].message.content + "</div>";
                                 cts += "</div>";
                                 cts += "</div>";
-                                cts += "  <div class='date'>"+ results[i].created_at + "</div>";
+                                cts += "<div class='data'>"+ results[i].created_at + "</div>";
                                 cts += "</div>";
                             }
-                            
                             $('#bms_messages').append(cts);
-                            //var changeL = $('#cmg').attr('src').replace('normal' , results[i].other_user.user_detail.file_name);
-		                    //$('#cmg').attr('src', changeL);
                         }
 		                //メッセージを送信するユーザーのIDをセット
 		                //$('#postmes').val('results[0]["other_user"]["id"]');
                     }).fail(function (err) {
                         alert('データの取得に失敗しました。');
                     });
-                    //$('.btn').off('click');
-                    //location.reload();
                 });
                                                                                                                                 
             
@@ -289,7 +282,7 @@
                         plusmess += "<div class='bms_message_text'>"+ content + "</div>";
                         plusmess += "</div>";
                         plusmess += "</div>";
-                        plusmess += "<div class='date'>"+ now + "</div>";
+                        plusmess += "<div class='data'>"+ now + "</div>";
                         plusmess += "</div>";
                         $('#bms_messages').append(plusmess);
                         }

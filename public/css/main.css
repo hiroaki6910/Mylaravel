@@ -1,5 +1,27 @@
 @charset "utf-8";
 
+.logo{
+  position: absolute;
+  top: 19px;
+  left: 370px;
+  z-index: 3;
+  color:#77a8da;
+}
+
+.logo2{
+  position: absolute;
+  top: 41px;
+  left: 384px;
+  font-size: 34px;
+  z-index: 2;
+  color: #dde2e6;
+}
+
+.maintitle{
+  display:inline-block; 
+  text-align:center;
+}
+
 .link{
   color: #6c757d;;
   transition: color 0.3s;
