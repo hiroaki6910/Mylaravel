@@ -1,17 +1,23 @@
 ## アプリケーションについて
+バンドメンバーの募集サイトです。
+Link:http://3.20.41.104/index.php/login
+ログインユーザー:hmhm
+メールアドレス：hmhm@hmhm.co.jp
 
-
-
-## 機能概要
-
-
-## 構築環境
-
+## 機能一覧
+・ログイン
+・プロフィール登録/編集
+・募集記事の投稿
+・メンバー/募集記事の検索
+・ダイレクトメッセージ送信
+・ダイレクトメッセージ履歴確認
 
 ## 開発言語
+PHP7(フレームワーク：Laravel5.8)
+jquery
+HTML5
+CSS3
+MySQL
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-source software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## 構築環境
+AWS(EC2)
