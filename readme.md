@@ -22,7 +22,7 @@ Link:http://3.20.41.104/index.php/login
 ## 開発言語
 PHP7(フレームワーク：Laravel5.8)
 
-jquery
+jQuery
 
 HTML5
 
