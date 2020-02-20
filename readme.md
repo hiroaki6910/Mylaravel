@@ -31,4 +31,7 @@ CSS3
 MySQL
 
 ## 構築環境
-AWS(EC2)
+AWS
+
+## OS
+AmazonLinux
