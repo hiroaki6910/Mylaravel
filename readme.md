@@ -24,10 +24,9 @@ PHP7(フレームワーク：Laravel5.8)
 
 jQuery
 
-HTML5
+HTML5/CSS3
 
-CSS3
-
+## DB
 MySQL
 
 ## 構築環境
