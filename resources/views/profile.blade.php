@@ -15,7 +15,7 @@
                 @endif
                 <form action="" method="post" enctype="multipart/form-data">
                     {{ csrf_field() }}
-                    @if($profAftEdt->user_detail->file_name == null)
+                    @if($profAftEdt->user_detail->file_name == "profile.png")
                         <div><img src="{{ asset('image/profile.png') }}" alt="logo"></div>
                     @else
                         <div><img src="/storage/{{$profAftEdt->user_detail->file_name}}"alt="logo" style="width:100px; height:100px;"></div>
@@ -89,8 +89,8 @@
                 <a href="{{ url('profile_edt') }}" class="btn-flat-border">プロフィール編集</a>
             </div>
             @elseif($profAftEdt->user_detail->update_flag == "0")
-                <div style="text-align:center;">
-                    <a href="{{ url('profile_edt') }}">詳細プロフィールを登録する</a>
+                <div style="text-align:center; margin-top:25px; margin-bottom:25px;">
+                    <a href="{{ url('profile_edt') }}" class="btn-flat-border">詳細プロフィールを登録する</a>
                 </div>
             @endif
         </div>
@@ -102,7 +102,7 @@
                 <div style="display:inline-block">{{$articles->title}}</div>
                 <div style="display:inline-block">
                     <span>(投稿日:</span>
-                    <span>{{$articles->created_at}})</span>
+                    <span>{{$articles->created_at->format('n月j日G時i分')}})</span>
                 </div>
                 @endforeach
                 @if(!isset($articles["title"]))

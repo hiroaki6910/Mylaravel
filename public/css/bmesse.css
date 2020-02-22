@@ -1,6 +1,39 @@
 @charset "utf-8";
+
+form #message_history_img{
+    width:55px; 
+    height:55px; 
+    margin-left:3px; 
+    position:relative; 
+    top:5px;
+}
+.message_history_name{
+    vertical-align: top;
+    padding-left: 5px; 
+    padding-right: 0px; 
+    padding-bottom: 0px; 
+    padding-top: 0px; 
+} 
+
+#message_history_content{
+    font-stretch: condensed; 
+    color: gray; 
+    position: relative; 
+    top: -31px; 
+    left: 65px; 
+    width: 205px; 
+    font-size: 12px;
+}
+
+#message_history_created_at{
+    margin-left: 3px; 
+    position: relative; 
+    top:-33px; 
+    left:63px; 
+    font-size:12px;
+}
+
 #your_container{
-    
     height: 600px;
     width: 485px;
 }

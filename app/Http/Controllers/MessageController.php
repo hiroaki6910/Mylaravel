@@ -61,7 +61,7 @@ class MessageController extends Controller
         
         $collection = Message_User::with(['senderUser' => function($query){$query->with('user_detail');},
         'recipientUser'=> function($query){$query->with('user_detail');},'message'])->where('sender_user_id', $user)
-        ->orwhere('recipient_user_id',$user)->get(); //ログインユーザーがsender_userかrecipient_userのメッセージを絞り込む
+        ->orwhere('recipient_user_id',$user)->orderBy('created_at','desc')->get(); //ログインユーザーがsender_userかrecipient_userのメッセージを絞り込む
         //dd($collection->ToArray());
         
         $tmp1=[];
@@ -81,6 +81,7 @@ class MessageController extends Controller
         }
         $ModalData = Session::get('_old_input');
         //dd($ModalData);
+        //dd($history);
         
         return view('/message', compact('history','ModalData')); 
        

@@ -4,7 +4,7 @@
         <div style="padding-left:0px; text-align:left; border-bottom: 1px solid #ccc; height:50px;">
             <a href="{{url('search_article')}}" class="btn-search">検索条件<i class="fas fa-search" style="margin-left:5px;"></i></a>
         </div>
-        <div style="width:788px; display:inline-block; margin-left:auto; margin-right:auto;">
+        <div style="width:795px; display:inline-block; margin-left:auto; margin-right:auto;">
             @if(!isset($articlelist[0]))
             <div>記事が見つかりませんでした</div>
             @endif
@@ -71,7 +71,7 @@
                 </div>
                 <div style="display:inline-block; text-align:right; width:786px;">
                     <span>投稿日:</span>
-                    <span>{{$show->created_at}}</span>
+                    <span>{{$show->created_at->format('n月j日G時i分')}}</span>
                 </div>
             </div>
             @endforeach

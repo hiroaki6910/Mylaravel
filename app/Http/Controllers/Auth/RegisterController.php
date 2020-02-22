@@ -73,7 +73,7 @@ class RegisterController extends Controller
         $user->user_detail()->create([
             'member_id' => $user->id,
             'gender' => "未設定", // テストデータ
-            'age' => "未設定", // テストデータ
+            'age' => "0", // テストデータ
             'address' => "未設定", // テストデータ
             'part' => "未設定", // テストデータ
             'genre' => "未設定", //テストデータ
@@ -81,6 +81,7 @@ class RegisterController extends Controller
             'community' => "0", // テストデータ
             'url' => "未設定", // テストデータ
             'introduction' => "未設定",// テストデータ
+            'file_name' => "profile.png",// テストデータ
             'update_flag' => "0"//テストデータ
         ]);
     

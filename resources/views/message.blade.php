@@ -4,15 +4,23 @@
     <div id="" style="height:1000px;padding-left:0px; text-align:left;">
         <div style="width:309px; display:inline-block; vertical-align: top;">
             <div style="margin-left:3px;">メッセージ履歴</div>
+            @if(!isset($history[0]))
+                <div>メッセージのやり取りをしているメンバーはいません</div>
+            @endif
             @foreach ($history as $history)
-            <div style="border-bottom: 1px solid #ccc; width:310px;">
+            <div style="border-bottom: 1px solid #ccc; width:310px; height:67px;">
                 <form action="" method="post" name="ms">
                     @csrf
-                    
                     @if(Auth::user()->id == $history->senderUser->id)
-                    <input type="button" class="btn" name="destination_name" value="{{$history->recipientUser->name}}">
+                    <img src="/storage/{{$history->recipientUser->user_detail->file_name}}" alt="logo" style="width:55px; height:55px; margin-left:3px; position:relative; top:5px;">
+                    <input type="button" class="btn" name="destination_name" value="{{$history->recipientUser->name}}" style="padding-left: 5px; padding-right: 0px; padding-bottom: 0px; padding-top: 0px; vertical-align:top;">
+                    <div style="font-stretch: condensed; color: gray; position: relative; top: -31px; left: 65px; width: 205px; font-size: 12px;">{{$history->message->content}}</div>
+                    <div style="margin-left: 3px; position: relative; top:-33px; left:63px; font-size:12px;">{{$history->message->created_at->format('n/j G:i')}}</div>
                     @elseif(Auth::user()->id == $history->recipientUser->id)
+                    <img src="/storage/{{$history->senderUser->user_detail->file_name}}" alt="logo" style="width:20px; height:20px;">
                     <input type="button" class="btn" name="destination_name" value="{{$history->senderUser->name}}">
+                    <div>{{$history->message->content}}</div>
+                    <div>{{$history->message->created_at->format('n月j日G時i分')}}</div>
                     @endif
                     
                     @if(Auth::user()->id == $history->senderUser->id)
@@ -20,7 +28,6 @@
                     @elseif(Auth::user()->id == $history->recipientUser->id)
                     <input type="hidden" class="o_id" name="destination_id" data-target="" value="{{$history->senderUser->id}}">
                     @endif
-                
                     <input type="hidden" class="logus" value="{{Auth::user()->id}}">
                 </form>
                 <!--
@@ -69,7 +76,6 @@
         <script type="text/javascript">
             $(function(){
                 var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-                
                 //プロフィール詳細のモーダルからメッセージを送る場合
                 if('{{$ModalData["mordal_user_id"]}}'){
                     //メッセージ送信先ユーザーID
@@ -111,6 +117,14 @@
                     for(var i in results){
                         //sender_user_idがログインユーザーIDと同じである場合
                         if(results[i].sender_user_id==login_user_id){
+                            var post_time = new Date(results[i].created_at);
+                            console.log(post_time);
+                            var year = post_time.getFullYear();
+                            var month = post_time.getMonth() + 1;
+                            var day = post_time.getDate();
+                            var hour = ("0"+post_time.getHours()).slice(-2);
+                            var minutes = ("0" +post_time.getMinutes()).slice(-2);
+                            var second = post_time.getSeconds();
                         //自分が送っているメッセージ
                             var cts ="";
                                 cts =  "<div class='bms_message bms_right'>";
@@ -119,7 +133,7 @@
                                 cts += "<div class='bms_message_text'>"+ results[i].message.content + "</div>";
                                 cts += "</div>";
                                 cts += "</div>";
-                                cts += "<div class='data'>"+ results[i].created_at + "</div>";
+                                cts += "<div class='data'>"+ month + '/' + day +'\t' + hour + ':' + minutes +"</div>";
                                 cts += "</div>";
                         }else{
                         //相手から送られてきているメッセージ
@@ -135,7 +149,7 @@
                                 cts += "  <div class='bms_message_text'>"+ results[i].message.content + "</div>";
                                 cts += "</div>";
                                 cts += "</div>";
-                                cts += "<div class='data'>"+ results[i].created_at + "</div>";
+                                cts += "<div class='data'>"+ month + '/' + day +'\t' + hour + ':' + minutes +"</div>";
                                 cts += "</div>";
                         }
                         $('#bms_messages').append(cts);
@@ -199,7 +213,6 @@
                             
                         //    $('<div></div>').append(result.message.user.name+ ':'+result.message.content).appendTo('.bms_message_text');
                         //});
-                        
                         for(var i in results){
                             //sender_user_idがログインユーザーIDと同じである場合
                             if(results[i].sender_user_id==loginuser){
@@ -209,6 +222,14 @@
                                 //ctus ="<div id='bms_chat_user_name'>";
                                 //ctus += "<span>"+results[i].recipient_user.name+ "</span>";
                                 //ctus += "</div>";
+                                var post_time = new Date(results[i].created_at);
+                                console.log(post_time);
+                                var year = post_time.getFullYear();
+                                var month = post_time.getMonth() + 1;
+                                var day = post_time.getDate();
+                                var hour = ("0"+post_time.getHours()).slice(-2);
+                                var minutes = ("0" +post_time.getMinutes()).slice(-2);
+                                var second = post_time.getSeconds();
                                 
                                 var cts ="";
                                 cts =  "<div class='bms_message bms_right'>";
@@ -217,7 +238,7 @@
                                 cts += "<div class='bms_message_text'>"+ results[i].message.content + "</div>";
                                 cts += "</div>";
                                 cts += "</div>";
-                                cts += "<div class='data'>"+ results[i].created_at + "</div>";
+                                cts += "<div class='data'>"+ month + '/' + day +'\t' + hour + ':' + minutes +"</div>";
                                 cts += "</div>";
                             }else{
                                 //相手から送られてきているメッセージ
@@ -228,13 +249,13 @@
                                 cts += "<span style='display:inline-block;'>"
                                 cts += "<img id ='cmg' src='/storage/"+img+"' style='width:30px; height:30px;'>";
                                 cts += "</span>";
-                                cts += "<span>"+ results[i].message.user.name + "</span>";
+                                cts += "<span style='padding-left:5px;'>"+ results[i].message.user.name + "</span>";
                                 cts += "<div class='bms_message_box'>";
                                 cts += "<div class='bms_message_content'>";
                                 cts += "<div class='bms_message_text'>"+ results[i].message.content + "</div>";
                                 cts += "</div>";
                                 cts += "</div>";
-                                cts += "<div class='data'>"+ results[i].created_at + "</div>";
+                                cts += "<div class='data'>"+ month + '/' + day +'\t' + hour + ':' + minutes +"</div>";
                                 cts += "</div>";
                             }
                             $('#bms_messages').append(cts);
@@ -275,6 +296,13 @@
                         console.log(res);
                         if(res==0){
                         var now = new Date();
+                        var year = now.getFullYear();
+                        var month = now.getMonth() + 1;
+                        var day = now.getDate();
+                        var hour = ("0"+now.getHours()).slice(-2);
+                        var minutes = ("0" +now.getMinutes()).slice(-2);
+                        var second = now.getSeconds();
+                        
                         var plusmess = ""
                         plusmess =  "<div class='bms_message bms_right'>";
                         plusmess += "<div class='bms_message_box'>";
@@ -282,9 +310,10 @@
                         plusmess += "<div class='bms_message_text'>"+ content + "</div>";
                         plusmess += "</div>";
                         plusmess += "</div>";
-                        plusmess += "<div class='data'>"+ now + "</div>";
+                        plusmess += "<div class='data'>"+ month + '/' + day +'\t' + hour + ':' + minutes +"</div>";
                         plusmess += "</div>";
                         $('#bms_messages').append(plusmess);
+                        $('#bms_send_message').val("");
                         }
                         else if(res==1){
                         alert('失敗しました');    

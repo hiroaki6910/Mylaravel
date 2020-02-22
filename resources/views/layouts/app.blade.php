@@ -25,9 +25,9 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/main') }}">
-                    <div style="font-size:40px; font-family:Comic Sans MS; text-align:center;">
-                        <span class="logo" style="top: 6px; left: 144px;">■</span>
-                        <span class="logo2" style="top: 23px; left: 160px;">■</span>
+                    <div style="position:relative; font-size:40px; font-family:Comic Sans MS; text-align:center;">
+                        <span class="logo" style="top: -7px; left: -20px;">■</span>
+                        <span class="logo2" style="top: 11px; left: -3px;">■</span>
                         <span class="maintitle" >slackers</span>
                     </div>
                     <div><p style="font-size:15px;">バンドメンバーが見つかるサイト</p></div>

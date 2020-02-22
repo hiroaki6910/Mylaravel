@@ -50,7 +50,7 @@
         @endif
         </nav>
     </header>
-    <main style="width:1000px; height:100%; min-height:1000px; display:table; margin-left:auto; margin-right:auto;">
+    <main style="width:999px; height:100%; min-height:1000px; display:table; margin-left:auto; margin-right:auto;">
         @if(Auth::check())
         <div style="display:table-cell; vertical-align:top; width:200px; height:100%; min-height:1000px; border: 1px solid #ccc; border-top-style:none; background-color:#f7f7f7;">
             <div class="" style="">

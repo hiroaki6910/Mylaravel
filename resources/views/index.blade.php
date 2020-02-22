@@ -13,20 +13,30 @@
             @foreach ($memberlist as $memberlist)
             @if($memberlist->id !== Auth::user()->id)
             <div style="display:inline-block; width:195px; max-width:195px; height:255px; max-height:255px; margin-top:10px; text-align:center;">
-                <div style="text-align:center;"><img src="/storage/{{$memberlist->user_detail->file_name}}" alt="logo" style="width:90px; height:90px;"></div>
+                <div style="text-align:center;">
+                    @if($memberlist->user_detail->file_name == "profile.png")
+                        <img src="{{ asset('image/profile.png') }}" alt="logo" style="width:90px; height:90px;">
+                    @else
+                        <img src="/storage/{{$memberlist->user_detail->file_name}}" alt="logo" style="width:90px; height:90px;">
+                    @endif
+                </div>
                 <div style="text-align:center;">
                     <span><h4>{{$memberlist->name}}</h4></span>
                 </div>
                 <div style="text-align:center;">
-                    <span style="">{{$memberlist->user_detail->age}}歳</span>
-                    <span style="">
-                        @if($memberlist->user_detail->gender == "1")
-                        男性
-                        @else
-                        女性
-                        @endif
-                    </span>
-                    <span style="">{{$memberlist->user_detail->address}}</span>
+                    @if($memberlist->user_detail->update_flag == "1")
+                        <span>{{$memberlist->user_detail->age}}歳</span>
+                        <span>
+                            @if($memberlist->user_detail->gender == "1")
+                                男性
+                            @else
+                                女性
+                            @endif
+                        </span>
+                        <span>{{$memberlist->user_detail->address}}</span>
+                    @else
+                        <span>未設定</span>
+                    @endif
                 </div>
                 <div class="balloon-top" style="text-align:center; margin-top:15px; margin-bottom:5px; padding:5px;">
                     <p style="width:155px; height:34px; word-wrap:break-word; overflow-wrap:break-word; overflow:hidden;">
@@ -35,8 +45,12 @@
                 </div>
                 <form action="" method="post" name="my">
                     @csrf
-                    <input type="button" class="btn" value="詳細" style="color:#77a8da; border:solid 1px #77a8da;">
-                    <input type="hidden" class="sendid" name="destination_id" data-target="" value="{{$memberlist->id}}">
+                    @if($memberlist->user_detail->update_flag == "1")
+                        <input type="button" class="btn" value="詳細" style="color: #77a8da; border: solid 1px #77a8da;">
+                    @else
+                        <input class="btn" value="詳細" style="width: 61px; color: #77a8da; border: solid 1px #77a8da;" disabled >
+                    @endif
+                        <input type="hidden" class="sendid" name="destination_id" data-target="" value="{{$memberlist->id}}">
                 </form>
             </div>
             @endif
@@ -47,11 +61,18 @@
             @endif
             @foreach ($memberlist as $memberlist)
             <div style="display:inline-block; width:195px; max-width:195px; height:255px; height:255px; max-height:255px; margin-top:10px; text-align:center;">
-                <div style="text-align:center;"><img src="/storage/{{$memberlist->user_detail->file_name}}" alt="logo" style="width:90px; height:90px;"></div>
+                <div style="text-align:center;">
+                    @if($memberlist->user_detail->file_name == "profile.png")
+                    <img src="{{ asset('image/profile.png') }}" alt="logo" style="width:90px; height:90px;">
+                    @else
+                    <img src="/storage/{{$memberlist->user_detail->file_name}}" alt="logo" style="width:90px; height:90px;">
+                    @endif
+                </div>
                 <div style="text-align:center;">
                     <span><h4>{{$memberlist->name}}</h4></span>
                 </div>
                 <div style="text-align:center;">
+                    @if($memberlist->user_detail->update_flag == "1")
                     <span style="">{{$memberlist->user_detail->age}}歳</span>
                     <span style="">
                         @if($memberlist->user_detail->gender == "1")
@@ -61,15 +82,22 @@
                         @endif
                     </span>
                     <span style="">{{$memberlist->user_detail->address}}</span>
+                    @else
+                    <span>未設定</span>
+                    @endif
                 </div>
                 <div class="balloon-top" style="text-align:center; margin-top:15px; margin-bottom:5px;">
-                    <p style="width:179px; height:20px; word-wrap:break-word; overflow-wrap:break-word;height:20px; overflow:hidden;">
+                    <p style="width:155px; height:20px; word-wrap:break-word; overflow-wrap:break-word;height:20px; overflow:hidden;">
                         {{$memberlist->user_detail->introduction}}
                     </p>
                 </div>
                 <form action="" method="post" name="my">
                     @csrf
-                    <input type="button" class="btn" value="詳細" style="color: #77a8da; border: solid 1px #77a8da;">
+                    @if($memberlist->user_detail->update_flag == "1")
+                        <input type="button" class="btn" value="詳細" style="color: #77a8da; border: solid 1px #77a8da;">
+                    @else
+                        <input class="btn" value="詳細" style="width:61px; color:#77a8da; border:solid 1px #77a8da;" disabled >
+                    @endif
                     <input type="hidden" class="sendid" name="destination_id" data-target="" value="{{$memberlist->id}}">
                 </form>
             </div>
@@ -115,7 +143,7 @@
                                 <div id="intro" style="width: 249px; height: 120px; word-wrap: break-word; overflow-wrap: break-word; overflow: hidden"></div>
                         </div>
                         <div id ="pct" style="display:inline-block; width:350px; vertical-align:top;">
-                            <input type="button" class="closeBtn" value="閉じる" style="margin-left:276px; margin-top:0px; margin-bottom:16px;"> 
+                            <input type="button" class="closeBtn" value="閉じる" style="margin-left:276px; margin-top:0px; margin-bottom:16px;">
                             <img id ="cmg" src="/storage/normal" alt="logo" style="width:350px; height:350px;">
                         </div>
                         <div style="height:150px; display:inline-block; width:666px; text-align:center;">
@@ -161,14 +189,16 @@
                         console.log(results);
                         var gender = results[0]["user_detail"]["gender"];
                         if (gender == "1"){
-                            var gender = "男"
+                            var gender = "男性"
+                        }else if(gender == "2"){
+                            var gender = "女性"
                         }else{
-                            var gender = "女"
+                            var gender = "未設定"
                         }
                         //それぞれのIDに対して、取得した値を挿入する。
                         $('#name').text(results[0]["name"]);
                         $('#age').text(results[0]["user_detail"]["age"]+"歳");
-                        $('#gender').text(gender + "性");
+                        $('#gender').text(gender);
                         $('#address').text(results[0]["user_detail"]["address"]);
                         $('#part').text(results[0]["user_detail"]["part"]);
                         $('#artist').text(results[0]["user_detail"]["artist"]);
