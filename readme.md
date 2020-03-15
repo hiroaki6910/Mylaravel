@@ -1,6 +1,6 @@
 ## アプリケーションについて
 バンドメンバーの募集サイトです。
-Link:http://3.20.41.104/index.php/login
+Link:https://portfolio-slackers.com/index.php/login
 
 以下でログイン可能です。
 
