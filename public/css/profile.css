@@ -15,20 +15,24 @@ label input {
     cursor: pointer;
 }
 
+.btn-edit{
+    text-decoration: none;
+}
+
 .btn-flat-border {
-  display: inline-block;
-  padding: 0.3em 1em;
-  text-decoration: none;
-  color: #77a8da;
-  border: solid 1px #77a8da;
-  border-radius: 3px;
-  transition: .4s;
+    display: inline-block;
+    padding: 0.3em 1em;
+    text-decoration: none;
+    color: #77a8da;
+    border: solid 1px #77a8da;
+    border-radius: 3px;
+    transition: .4s;
 }
 
 .btn-flat-border:hover {
-  background: #77a8da;
-  text-decoration: none;
-  color: white;
+    background: #77a8da;
+    text-decoration: none;
+    color: white;
 }
 
 .prof {

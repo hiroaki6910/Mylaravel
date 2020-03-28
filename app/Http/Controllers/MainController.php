@@ -31,34 +31,13 @@ class MainController extends Controller
     public function show_search_m()
     {
         $data = session()->all();
-        return $data;
+        //return $data;
         return view('search_member' ,compact('$data'));
     }
     
     //メンバー一覧の取得
     public function showmember(Request $request)
     {
-        //実装中↓
-        //$show = User::nameEqual($request->name);
-
-        //$show_m = User_detail::addEqual($request->add)
-        //->partEqual($request->part)
-        //->genreEqual($request->genre)
-        //->genderEqual($request->gender)
-        //->ageGreater($request->agemax)
-        //->ageLessthan($request->agemin)
-        //->artistEqual($request->artist)
-        //->get();
-        //dd($show_m->ToArray());
-        
-        //実装中↑
-        
-        //$show = User::with(['user_detail', 'article'])->get();
-        //dd($show->ToArray());
-        
-        //$show = User::searchmember();
-        //dd($show->ToArray());
-        
         $name = $request->name;
         $add =  $request->add;
         $part = $request->part;
@@ -80,20 +59,30 @@ class MainController extends Controller
             return $query->where('address',$add);
         	});
         }
-        if(isset($part)&&$part!==NULL){
-        	$show=User::whereHas('user_detail', function($query) use($part){
-            $query->where('part',$part);
-             });
+        //if(isset($part)&&$part!==NULL){
+        //	$show=User::whereHas('user_detail', function($query) use($part){
+        //    $query->where('part',$part);
+        //     });
+        //}
+        
+        if(isset($part) && $part !== NULL){
+        	$show->whereHas('user_detail', function($query) use($part){
+                foreach($part as $part){
+                    $query->where('part','LIKE', "%{$part}%");
+                }
+            });
         }
         if(isset($genre)&&$genre!==NULL){
-        	$show=User::whereHas('user_detail', function($query) use($genre){
-            $query->where('genre',$genre);
+        	$show->whereHas('user_detail', function($query) use($genre){
+        	    foreach($genre as $genre){
+        	        $query->where('genre','LIKE',"%{$genre}%");  
+        	    }
             });
         }
         if(isset($gender)&&$gender!==NULL){
         	$show=User::whereHas('user_detail', function($query) use($gender){
             $query->where('gender', 'like', '%'.$gender.'%');
-             });
+            });
         }
         if(isset($agemax)&&$agemax!==NULL){
         	$show=User::whereHas('user_detail', function($query) use($agemax){
@@ -162,26 +151,33 @@ class MainController extends Controller
         $direction = $request->direction;
         $day = $request->day;
         
-    
         $show_article = Article::query(); 
         
-        if(isset($add)&&$add!==NULL){
+        if(isset($add) && $add !== NULL){
         	$show_article->where('area',$add);
         }
         
-        if(isset($part)&&$part!==NULL){
-        	$show_article->where('part',$part);
+        if(isset($part) && $part !== NULL){
+        	$show_article->where(function ($query) use ($part) {
+        	    foreach ($part as $part) {
+        	        $query->where('part', 'LIKE', "%{$part}%");
+        	    }
+        	});
         }
         
-        if(isset($genre)&&$genre!==NULL){
-        	$show_article->where('genre',$genre);
+        if(isset($genre) && $genre !== NULL){
+        	$show_article->where(function ($query) use ($genre) {
+                foreach ($genre as $genre) {
+                    $query->where('genre','LIKE', "%{$genre}%");
+                }
+            });
         }
         
-        if(isset($direction)&&$direction!==NULL){
+        if(isset($direction) && $direction !== NULL){
         	$show_article->where('direction',$direction);
         }
         
-        if(isset($day)&&$day!==NULL){
+        if(isset($day) && $day !== NULL){
         	$show_article->where('day',$day);
         }
         

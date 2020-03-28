@@ -52,11 +52,14 @@ Route::get('/profile_edt', 'UserprofileController@profile');
 Route::post('/profile_edt', 'UserprofileController@update');
 
 
-//****メンバー募集記事投稿****
-Route::get('/article_edt', 'PostArticleController@articleindex');
-Route::get('/article_edt', 'PostArticleController@usid');
+//****メンバー募集記事投稿(新規作成)****
+Route::get('/article_dsp', 'PostArticleController@articleindex');
+Route::get('/article_dsp', 'PostArticleController@usid');
+Route::post('/article_dsp', 'PostArticleController@ArticleRegist');
 
-Route::post('/article_edt', 'PostArticleController@ArticleRegist');
+//****メンバー募集記事投稿(修正)****
+Route::get('/article_edt', 'PostArticleController@articleindex_edt');
+Route::post('/article_edt', 'PostArticleController@updateArticle');
 
 //****メッセージ****
 Route::get('/message', function () {

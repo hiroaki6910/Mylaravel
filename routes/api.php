@@ -22,7 +22,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 //});
 
 //Route::get('/message_react', 'UserprofileController@react');
-Route::get('/message_react', 'MessageController@MessageHistory');
+//Route::get('/message_react', 'MessageController@MessageHistory');
 //Route::get('/message_react', 'MainController@sendmessage');
 //Route::get('/message/{id}', 'MainController@sendmessage');
 Route::post('/main', 'MainController@modal');

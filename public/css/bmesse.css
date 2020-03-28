@@ -102,7 +102,7 @@ form #message_history_img{
         float: left;/*吹き出しをbms_messagesに対して左寄せ*/
         line-height: 1.3em;
         max-width:300px;
-        min-width: 240px;
+        min-width: 243px;
         margin-top: 20px;
     }
         

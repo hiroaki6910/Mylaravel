@@ -17,10 +17,10 @@
                     <div style="font-stretch: condensed; color: gray; position: relative; top: -31px; left: 65px; width: 205px; font-size: 12px;">{{$history->message->content}}</div>
                     <div style="margin-left: 3px; position: relative; top:-33px; left:63px; font-size:12px;">{{$history->message->created_at->format('n/j G:i')}}</div>
                     @elseif(Auth::user()->id == $history->recipientUser->id)
-                    <img src="/storage/{{$history->senderUser->user_detail->file_name}}" alt="logo" style="width:20px; height:20px;">
-                    <input type="button" class="btn" name="destination_name" value="{{$history->senderUser->name}}">
-                    <div>{{$history->message->content}}</div>
-                    <div>{{$history->message->created_at->format('n月j日G時i分')}}</div>
+                    <img src="/storage/{{$history->senderUser->user_detail->file_name}}" alt="logo" style="width:55px; height:55px; margin-left:3px; position:relative; top:5px;">
+                    <input type="button" class="btn" name="destination_name" value="{{$history->senderUser->name}}" style="padding-left: 5px; padding-right: 0px; padding-bottom: 0px; padding-top: 0px; vertical-align:top;">
+                    <div style="font-stretch: condensed; color: gray; position: relative; top: -31px; left: 65px; width: 205px; font-size: 12px;">{{$history->message->content}}</div>
+                    <div style="margin-left: 3px; position: relative; top:-33px; left:63px; font-size:12px;">{{$history->message->created_at->format('n/j G:i')}}</div>
                     @endif
                     
                     @if(Auth::user()->id == $history->senderUser->id)
@@ -136,6 +136,14 @@
                                 cts += "<div class='data'>"+ month + '/' + day +'\t' + hour + ':' + minutes +"</div>";
                                 cts += "</div>";
                         }else{
+                            var post_time = new Date(results[i].created_at);
+                            console.log(post_time);
+                            var year = post_time.getFullYear();
+                            var month = post_time.getMonth() + 1;
+                            var day = post_time.getDate();
+                            var hour = ("0"+post_time.getHours()).slice(-2);
+                            var minutes = ("0" +post_time.getMinutes()).slice(-2);
+                            var second = post_time.getSeconds();
                         //相手から送られてきているメッセージ
                             var img = results[i]["sender_user"]["user_detail"]["file_name"];
                             var cts ="";
@@ -194,34 +202,10 @@
                         dataType: 'json'
                         
                     }).done(function (results) {
-                        //alert("success!");
-                        //console.log(results);
-                        //メッセージ送信先のユーザー名を取得
-                        //$('#bms_chat_user_name').text(results[0]["other_user"]["name"]);
-                        //$('#name').text(results[0]["other_user"]["name"]);
-                        //プロフィール写真のパスを置換する処理
-                        //var changeL = $('#cmg').attr('src').replace('normal' , results[0]["other_user"]["user_detail"]["file_name"]);
-		                //$('#cmg').attr('src', changeL);
-		                
-		                //for (var key in results) {
-                        //console.log(key);
-                        //$('.bms_message_text').text(results[key]["message"]["content"]);
-                        //}
-                        
-                        //$.each(results, function(index, result){
-                        //    console.log(result.message.content);
-                            
-                        //    $('<div></div>').append(result.message.user.name+ ':'+result.message.content).appendTo('.bms_message_text');
-                        //});
                         for(var i in results){
                             //sender_user_idがログインユーザーIDと同じである場合
                             if(results[i].sender_user_id==loginuser){
                                 //自分が送っているメッセージ
-                                
-                                //var ctus ="";
-                                //ctus ="<div id='bms_chat_user_name'>";
-                                //ctus += "<span>"+results[i].recipient_user.name+ "</span>";
-                                //ctus += "</div>";
                                 var post_time = new Date(results[i].created_at);
                                 console.log(post_time);
                                 var year = post_time.getFullYear();
@@ -242,8 +226,17 @@
                                 cts += "</div>";
                             }else{
                                 //相手から送られてきているメッセージ
+                                var post_time = new Date(results[i].created_at);
+                                console.log(post_time);
+                                var year = post_time.getFullYear();
+                                var month = post_time.getMonth() + 1;
+                                var day = post_time.getDate();
+                                var hour = ("0"+post_time.getHours()).slice(-2);
+                                var minutes = ("0" +post_time.getMinutes()).slice(-2);
+                                var second = post_time.getSeconds();
+                                
                                 var img = results[i]["sender_user"]["user_detail"]["file_name"];
-                                //console.log(img);
+                                
                                 var cts ="";
                                 cts =  "<div class='bms_message bms_left'>";
                                 cts += "<span style='display:inline-block;'>"
@@ -296,6 +289,7 @@
                         console.log(res);
                         if(res==0){
                         var now = new Date();
+                        console.log(now);
                         var year = now.getFullYear();
                         var month = now.getMonth() + 1;
                         var day = now.getDate();

@@ -9,6 +9,9 @@
             @if(Auth::check())
             @if(!isset($memberlist[0]))
             <div>メンバーが見つかりませんでした</div>
+            <!--ログインユーザーが検索結果にヒットするケースを回避する-->
+            @elseif($memberlist[0]["id"] === Auth::user()->id)
+            <div>メンバーが見つかりませんでした</div>
             @endif
             @foreach ($memberlist as $memberlist)
             @if($memberlist->id !== Auth::user()->id)
@@ -20,8 +23,8 @@
                         <img src="/storage/{{$memberlist->user_detail->file_name}}" alt="logo" style="width:90px; height:90px;">
                     @endif
                 </div>
-                <div style="text-align:center;">
-                    <span><h4>{{$memberlist->name}}</h4></span>
+                <div style="text-align:center; padding-top:3px;">
+                    <span><h5>{{$memberlist->name}}</h5></span>
                 </div>
                 <div style="text-align:center;">
                     @if($memberlist->user_detail->update_flag == "1")
@@ -68,8 +71,8 @@
                     <img src="/storage/{{$memberlist->user_detail->file_name}}" alt="logo" style="width:90px; height:90px;">
                     @endif
                 </div>
-                <div style="text-align:center;">
-                    <span><h4>{{$memberlist->name}}</h4></span>
+                <div style="text-align:center; padding-top:3px;">
+                    <span><h5>{{$memberlist->name}}</h5></span>
                 </div>
                 <div style="text-align:center;">
                     @if($memberlist->user_detail->update_flag == "1")

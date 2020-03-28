@@ -79,6 +79,7 @@ class MessageController extends Controller
                 }
             } 
         }
+        //return $history;
         $ModalData = Session::get('_old_input');
         //dd($ModalData);
         //dd($history);

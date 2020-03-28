@@ -104,12 +104,17 @@
                     <span>(投稿日:</span>
                     <span>{{$articles->created_at->format('n月j日G時i分')}})</span>
                 </div>
+                <div style="display:inline-block">
+                    <span class="btn-edit">
+                        <a href="{{url('article_edt') }}?id={{ $articles->id }}"<i class="far fa-edit"></i></a>
+                    </span>
+                </div>
                 @endforeach
                 @if(!isset($articles["title"]))
                 <div>まだ記事はありません</div>
                 @endif
             </div>
-            <div style="text-align:center; margin-top:25px; margin-bottom:25px;"><a href="{{ url('article_edt') }}" class="btn-flat-border">記事を投稿する</a></div>
+            <div style="text-align:center; margin-top:25px; margin-bottom:25px;"><a href="{{ url('article_dsp') }}" class="btn-flat-border">記事を投稿する</a></div>
         </div>
     </div>
 @endsection
